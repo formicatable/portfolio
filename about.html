@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Charlie Sim</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        /* Back Navigation */
+        .back-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            z-index: 10000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .back-link:hover {
+            gap: 12px;
+        }
+
+        .spacer {
+            height: 60px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.1"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: white;
+        }
+
+        .header .tagline {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #f1f5f9;
+        }
+
+        .content-block {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #334155;
+        }
+
+        .content-block p {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .content-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: #a5b4fc;
+            font-weight: 600;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* Skills List */
+        .skills-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skills-list li {
+            padding: 12px 18px;
+            background: #334155;
+            border-radius: 8px;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skills-list li::before {
+            content: "▹";
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid #0f172a;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 5px;
+        }
+
+        .timeline-period {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        /* Links */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .link-card {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #334155;
+            text-align: center;
+            text-decoration: none;
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .link-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .link-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .link-description {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header .tagline {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .timeline {
+                padding-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Navigation -->
+    <nav class="back-nav">
+        <a href="index.html" class="back-link">
+            ← Back to Portfolio
+        </a>
+    </nav>
+    <div class="spacer"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>About Me</h1>
+            <p class="tagline">Building tools that eliminate toil, documenting systems that matter</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Who I Am -->
+        <section class="section">
+            <h2 class="section-title">Who I Am</h2>
+            <div class="content-block">
+                <p>
+                    I'm <span class="highlight">Charlie Sim</span>, a Senior Technical Writer with 13+ years of experience who doesn't just document systems—I build automation around them. Most recently at AWS, I documented Amazon Glue ETL services, but my career has always been about finding the intersection between clear communication and practical engineering.
+                </p>
+                <p>
+                    What makes me different? I can write Python to automate your docs pipeline, debug the code I'm documenting, and then explain it all in plain English. I've saved teams hundreds of hours by automating repetitive tasks, and I've secured over $100M in contracts through clear, compelling proposal writing.
+                </p>
+                <p>
+                    Outside of work, I run cryptocurrency mining operations powered by solar energy—because if you're going to mine Bitcoin, you might as well do it sustainably. I hold positions in Bitcoin and Solana, and I'm always tinkering with hardware setups and optimization strategies.
+                </p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">13+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$100M+</div>
+                    <div class="stat-label">Contracts Secured</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">51%</div>
+                    <div class="stat-label">Production Time Reduced</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What I Do -->
+        <section class="section">
+            <h2 class="section-title">What I Do</h2>
+            <div class="content-block">
+                <p>
+                    I specialize in <span class="highlight">docs-as-code workflows</span>, where documentation lives alongside the code it describes. I believe the best documentation is the documentation that exists—and that means building systems that make it effortless to create and maintain.
+                </p>
+                <p>
+                    My projects, like the <span class="highlight">GitHub-to-Slack automation</span> that posts weekly updates automatically, or the <span class="highlight">Traffic Bot</span> that keeps Slack channels organized without being annoying, demonstrate my approach: identify the pain points, build something that solves them elegantly, then document the hell out of it.
+                </p>
+                <p>
+                    I'm equally comfortable writing API documentation for distributed systems, creating automation scripts that save hours of manual work, or debugging production issues to understand what actually needs to be documented.
+                </p>
+            </div>
+
+            <ul class="skills-list">
+                <li>Python & JavaScript Development</li>
+                <li>API Documentation</li>
+                <li>GitHub Actions & CI/CD</li>
+                <li>Docs-as-Code Workflows</li>
+                <li>AWS Services (Glue, Lambda, S3)</li>
+                <li>Slack Bot Development</li>
+                <li>Process Automation</li>
+                <li>Technical Proposal Writing</li>
+            </ul>
+        </section>
+
+        <!-- Career Highlights -->
+        <section class="section">
+            <h2 class="section-title">Career Highlights</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-title">Senior Technical Writer, AWS</div>
+                    <div class="timeline-period">Recent Role</div>
+                    <div class="timeline-description">
+                        Documented Amazon Glue ETL services, specializing in complex distributed systems. Built automation tools to streamline documentation workflows. Collaborated with engineering teams to ensure technical accuracy while maintaining clarity for end users.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Proposal Writing & Business Development</div>
+                    <div class="timeline-period">Previous Roles</div>
+                    <div class="timeline-description">
+                        Secured over $100M in contracts including Olympic Games bids. Achieved 51% reduction in production time through process improvements and standardization. Built systematic approaches to proposal development that consistently delivered results.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Documentation Leadership</div>
+                    <div class="timeline-period">Various Companies</div>
+                    <div class="timeline-description">
+                        Led documentation initiatives at EV Connect, Ticketmaster, and other tech companies. Specialized in taking complex technical systems and making them accessible to diverse audiences. Championed docs-as-code methodologies and automation.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Education</div>
+                    <div class="timeline-period">Rutgers University</div>
+                    <div class="timeline-description">
+                        B.A. in English. Built foundation in clear communication and critical thinking that has informed every technical writing role since.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why I Write -->
+        <section class="section">
+            <h2 class="section-title">Why I Write</h2>
+            <div class="content-block">
+                <p>
+                    I maintain a <span class="highlight">Substack newsletter</span> where I share insights on technical writing, automation, and building tools that make work easier. The writing philosophy is simple: <strong>practical knowledge, no fluff, no spam</strong>.
+                </p>
+                <p>
+                    Topics include docs-as-code workflows, automation strategies for technical writers, lessons learned from building production systems, and the intersection of technical writing and engineering. If you're interested in becoming a better technical writer or building better documentation systems, it's for you.
+                </p>
+            </div>
+        </section>
+
+        <!-- Connect -->
+        <section class="section">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="links-grid">
+                <a href="https://github.com/yourusername" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-icon">🐙</div>
+                    <div class="link-title">GitHub</div>
+                    <div class="link-description">Check out my code and automation projects</div>
+                </a>
+
+                <a href="https://charliesim.substack.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-icon">📝</div>
+                    <div class="link-title">Substack</div>
+                    <div class="link-description">Technical writing insights and automation tips</div>
+                </a>
+
+                <a href="https://linkedin.com/in/yourprofile" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-icon">💼</div>
+                    <div class="link-title">LinkedIn</div>
+                    <div class="link-description">Professional background and experience</div>
+                </a>
+
+                <a href="mailto:your.email@example.com" class="link-card">
+                    <div class="link-icon">📧</div>
+                    <div class="link-title">Email</div>
+                    <div class="link-description">Get in touch directly</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Currently -->
+        <section class="section">
+            <h2 class="section-title">What I'm Looking For</h2>
+            <div class="content-block">
+                <p>
+                    I'm actively seeking opportunities where I can combine <span class="highlight">technical writing expertise with hands-on development skills</span>. Ideal roles include:
+                </p>
+                <p style="margin-top: 20px; padding-left: 20px;">
+                    <strong>Documentation Engineer</strong> – Building docs systems, not just writing docs<br>
+                    <strong>Staff Technical Writer</strong> – Leading docs strategy with automation capabilities<br>
+                    <strong>Developer Experience Engineer</strong> – Making developer tools accessible and well-documented<br>
+                    <strong>Product Manager (Technical Docs)</strong> – Strategic planning for documentation as product
+                </p>
+                <p style="margin-top: 20px;">
+                    If you need someone who can write the docs <em>and</em> build the pipeline that generates them, let's talk.
+                </p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
